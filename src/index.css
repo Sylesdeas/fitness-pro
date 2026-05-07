@@ -4,27 +4,58 @@
   box-sizing: border-box;
 }
 
+:root {
+  --page-background-image: url("https://www.primalstrength.com/cdn/shop/files/gymdesign_render_Two_collumn_grid_cb1b5850-fa8e-4a7b-a2b3-190c2e45facd.jpg?v=1680719688&width=1500");
+  --page-background-overlay: rgba(203, 225, 253, 0);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(
+      var(--page-background-overlay),
+      var(--page-background-overlay)
+    ),
+    var(--page-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 form,
 label,
-main {
+main,
+section {
   display: grid;
   gap: 0.5rem;
 }
 
 #root {
-  width: 45ch;
+  width: min(45rem, calc(100vw - 2rem));
   margin: 0 auto;
   padding: 1rem;
+  min-height: calc(100vh - 2rem);
+  background: linear-gradient(
+    180deg,
+    rgba(220, 238, 255, 0.9),
+    rgba(234, 222, 255, 0.9)
+  );
+  backdrop-filter: blur(2px);
 }
 
 header {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 header nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1ch;
 }
 
@@ -42,6 +73,14 @@ ol {
   padding-left: 1rem;
 }
 
+li {
+  margin: 0.5rem 0;
+}
+
 p[role="alert"] {
   color: red;
+}
+
+.active {
+  font-weight: bold;
 }
