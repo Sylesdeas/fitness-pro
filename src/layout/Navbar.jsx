@@ -1,36 +1,26 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { useAuth } from "../auth/AuthContext";
 
-/** Navbar with site navigation links */
 export default function Navbar() {
+  const { token, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/activities");
+  };
+
   return (
-    <header>
-      <p>Fitness Trackr</p>
-      <nav>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/activities"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          Activities
-        </NavLink>
-        <NavLink
-          to="/register"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          Register
-        </NavLink>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? "active" : "")}
-        >
-          Login
-        </NavLink>
-      </nav>
-    </header>
+    <nav>
+      <NavLink to="/activities">Activities</NavLink>
+      {token ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/register">Register</NavLink>
+        </>
+      )}
+    </nav>
   );
 }

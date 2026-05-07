@@ -1,7 +1,8 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
 import ActivitiesPage from "./activities/ActivitiesPage";
+import ActivityDetailsPage from "./activities/ActivityDetailsPage";
 import Error404 from "./Error404.jsx";
 import Layout from "./layout/Layout";
 
@@ -14,9 +15,14 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/activities" element={<ActivitiesPage />} />
+        <Route index element={<Navigate to="/activities" replace />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="activities" element={<ActivitiesPage />} />
+        <Route
+          path="activities/:activityId"
+          element={<ActivityDetailsPage />}
+        />
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>
